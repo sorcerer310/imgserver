@@ -1,0 +1,42 @@
+1:在idea中创建一个Web Application类型的项目
+
+2:配置tomcat的tomcat/conf/web.xml文件中的内容
+找到<servlet>节点修改为以下内容
+<servlet>
+    <servlet-name>default</servlet-name>
+    <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+    <init-param>
+        <param-name>debug</param-name>
+        <param-value>0</param-value>
+    </init-param>
+    <init-param>
+        <param-name>readonly</param-name>
+        <param-value>false</param-value>
+    </init-param>
+    <init-param>
+        <param-name>listings</param-name>
+        <param-value>false</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+</servlet>
+
+3:pom.xml中增加
+<dependency>
+    <groupId>com.sun.jersey</groupId>
+    <artifactId>jersey-core</artifactId>
+    <version>1.19.3</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.jersey</groupId>
+    <artifactId>jersey-client</artifactId>
+    <version>1.19.3</version>
+</dependency>
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.5</version>
+</dependency>
+
+4:在web目录中创建一个保存图片的目录uploads
+
+5:编写测试上传文件的代码:

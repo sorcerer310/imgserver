@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="imageserver:war exploded">
+    <output-path>$PROJECT_DIR$/target/artifacts/imageserver_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="imgserver/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="imgserver" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
