@@ -1,0 +1,46 @@
+1:修改目标服务器tomcat的配置文件tomcat/conf/web.xml
+找到<servlet>节点修改为以下内容
+<servlet>
+    <servlet-name>default</servlet-name>
+    <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+    <init-param>
+        <param-name>debug</param-name>
+        <param-value>0</param-value>
+    </init-param>
+    <init-param>
+        <param-name>readonly</param-name>
+        <param-value>false</param-value>
+    </init-param>
+    <init-param>
+        <param-name>listings</param-name>
+        <param-value>false</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+</servlet>
+
+2:为tomcat增加发布项目的用户，找到tomcat/conf/tomcat-users.xml文件
+在<tomcat-users>中增加 权限与用户数据
+ <role rolename="manager-script"/>
+ <user username="deployer" password="password" roles="manager-script"/>
+
+3:修改pom.xml文件中
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <ignorePackaging>true</ignorePackaging>
+                    <url>http://111.111.111.11:8080/manager/text</url>
+                    <path>/img-server</path>
+                    <username>deployer</username>
+                    <password>password</password>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <url>、<username>、<password>标签中的发布服务器、用户名、密码等数据
+
+4:双击maven插件中tomcat7:redeploy-only,向服务器发布项目。
